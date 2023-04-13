@@ -14,7 +14,7 @@ export default function Header() {
         <img src={logo} alt="logo" />
       </div>
       <div className={styles.user}>
-        <input value={search} onChange={e => setSearch(e.target.value)} className='search' type="text" />
+        <input value={search} onChange={e => setSearch(e.target.value)} className={styles.search} type="text" />
         <a href=""><img src={favorite} alt="favorite" /></a>
       </div>
   </header>

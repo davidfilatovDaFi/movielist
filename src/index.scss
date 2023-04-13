@@ -35,6 +35,10 @@ ul li {list-style: none;}
 img {vertical-align: top;}
 /* Обнуление стилей*/
 
+body {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
 .container {
   max-width: 1300px;
   margin: 0 auto;
@@ -50,9 +54,9 @@ img {vertical-align: top;}
   @media (max-width:570px) {
     max-width: 360px;
   }
+  @media (max-width:390px) {
+    max-width: 260px;
+  }
 }
 
-.home {
-  background-color: rgb(25, 23, 43);
-  height: 100vh;
-}
+
