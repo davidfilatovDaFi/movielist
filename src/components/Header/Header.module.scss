@@ -32,4 +32,9 @@
   @media (max-width:390px) {
     width: 40%;
   }
+  background-color: inherit;
+  color: rgb(185, 185, 185);
+  &::placeholder {
+    color: inherit;
+  }
 }
