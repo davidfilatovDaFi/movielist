@@ -2,21 +2,16 @@ import React, { useEffect, useState } from 'react';
 import styles from './Home.module.scss'
 import Header from '../../components/Header/Header';
 import MovieBlock from '../../components/MovieBlock/MovieBlock';
+import { fetchAPI } from '../../services/serviceAPI';
+import { movieListUrl, descriptionAPI } from '../../constains/constains';
 
 function Home() {
 
   const [movies,setMovies] = useState([])
   const [search,setSearch] = useState('')
 
-  async function getMovies () {
-    const response = await fetch('https://kinopoiskapiunofficial.tech/api/v2.2/films/top?type=TOP_100_POPULAR_FILMS&page=1', {
-      method: 'GET',
-      headers: {
-          'X-API-KEY': '30d403ff-e11b-4650-8973-c33043daef63',
-          'Content-Type': 'application/json',
-      },
-  })
-    const data = await response.json()
+  const getMovies = async () => {
+    const data = await fetchAPI(movieListUrl+'1',descriptionAPI)
     setMovies(data.films)
   }
 
