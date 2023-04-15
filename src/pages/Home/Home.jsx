@@ -19,7 +19,6 @@ function Home() {
     getMovies()
   }, [])
   
-  console.log(movies)
   return (
     <div className={styles.home}>
       <div className='container'>
@@ -28,12 +27,14 @@ function Home() {
         {search 
         ? movies.filter(movie => movie.nameRu.toLowerCase().includes(search.toLowerCase())).map(movie => <MovieBlock 
           key={movie.filmId}
+          id={movie.filmId}
           poster={movie.posterUrlPreview}
           rating={movie.rating}
           title={movie.nameRu}
           genres={movie.genres} />)
         : movies.map(movie => <MovieBlock 
         key={movie.filmId}
+        id={movie.filmId}
         poster={movie.posterUrlPreview}
         rating={movie.rating}
         title={movie.nameRu}
