@@ -1,5 +1,8 @@
 .wrapper {
   height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 .circle {
   width: 150px;
@@ -8,8 +11,7 @@
   border-radius: 50%;
   border-top-color: transparent;
   position: relative;
-  top: 30%;
-  left: 50%;
+  bottom: 15%;
   animation-name: circle;
   animation-duration: 1s;
   animation-iteration-count: infinite;

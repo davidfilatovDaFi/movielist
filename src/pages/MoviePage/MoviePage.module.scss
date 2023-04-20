@@ -7,11 +7,16 @@
 .body {
   display: flex;
   justify-content: space-between;
+  @media (max-width:760px) {
+    flex-direction: column;
+    align-items: center;
+  }
 }
 .view {
   flex: 0 0 28%;
 }
 .picture {
+  max-width: 400px;
   width: 100%;
 }
 .info {
@@ -21,6 +26,12 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  @media (max-width:760px) {
+    margin: 30px 0 50px 0;
+    font-size: 20px;
+    flex-direction: column;
+    gap: 20px;
+  }
 }
 .button {
   display: flex;
@@ -47,11 +58,18 @@
 .list {
   display: flex;
   flex-direction: column;
-  & li {
-    margin-bottom: 25px;
+  height: 100%;
+  gap: 6%;
+  @media (max-width:1200px) {
+    gap: 15px;
   }
 }
 .text {
   line-height: 20px;
   margin: 20px 0;
+}
+.production {
+  @media (max-width:390px) {
+    display: none;
+  }
 }

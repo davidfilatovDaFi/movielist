@@ -42,48 +42,48 @@ export default function MoviePage() {
         {loading 
         ? <Loader/>
         : <div className={styles.body}>
-          <article className={styles.view}>
-            <img className={styles.picture} src={movie.posterUrl} alt="" />
-          </article>
-          <article className={styles.info}>
-            <header className={styles.header}>
-                <h1>{movie.nameRu}</h1>
-                <button className={styles.button}>
-                  <Favorite className={styles.favorite}/>
-                  Буду смотреть
-                </button>
-            </header>
-            <div className={styles.wrapper}>
-              <h1 className={styles.about}>О фильме</h1>
-              <div className={styles.description}>
-                <ul className={styles.list}>
-                  <li><span>Год производства</span></li>
-                  <li><span>Страна</span></li>
-                  <li><span>Жанр</span></li>
-                  <li><span>Режисер</span></li>
-                  <li><span>Бюджет</span></li>
-                  <li><span>Сборы в США</span></li>
-                  <li><span>Сборы в России</span></li>
-                  <li><span>Сборы в мире</span></li>
-                </ul>
-                <ul className={styles.list}>
-                  <li><span>{movie.year}</span><span></span></li>
-                  <li><span>{typeof movie.countries === 'undefined' 
-                  ? '-'
-                  : movie.countries.map(el => <span key={el.country}>{el.country} </span>)}</span></li>
-                  <li><span>{typeof movie.genres === 'undefined' 
-                  ? '-'
-                  : movie.genres.map(el => <span key={el.genre}>{el.genre} </span>)}</span></li>
-                  <li><span>{staff[0] === undefined ? '-' : staff[0].nameRu}</span></li>
-                  <li><span>{budget['BUDGET'] ? '$' + budget['BUDGET'] : '-'}</span></li>
-                  <li><span>{budget['USA'] ? '$' + budget['USA'] : '-'}</span></li>
-                  <li><span>{budget['RUS'] ? '$' + budget['RUS'] : '-'}</span></li>
-                  <li><span>{budget['WORLD'] ? '$' + budget['WORLD'] : '-'}</span></li>
-                </ul>
+            <article className={styles.view}>
+              <img className={styles.picture} src={movie.posterUrl} alt="" />
+            </article>
+            <article className={styles.info}>
+              <header className={styles.header}>
+                  <h1>{movie.nameRu}</h1>
+                  <button className={styles.button}>
+                    <Favorite className={styles.favorite}/>
+                    Буду смотреть
+                  </button>
+              </header>
+              <div className={styles.wrapper}>
+                <h1 className={styles.about}>О фильме</h1>
+                <div className={styles.description}>
+                  <ul className={styles.list}>
+                    <li>Год <span className={styles.production}>производства</span></li>
+                    <li><span>Страна</span></li>
+                    <li><span>Жанр</span></li>
+                    <li><span>Режисер</span></li>
+                    <li><span>Бюджет</span></li>
+                    <li><span>Сборы в США</span></li>
+                    <li><span>Сборы в России</span></li>
+                    <li><span>Сборы в мире</span></li>
+                  </ul>
+                  <ul className={styles.list}>
+                    <li><span>{movie.year}</span><span></span></li>
+                    <li><span>{typeof movie.countries === 'undefined' 
+                    ? '-'
+                    : movie.countries.map(el => <span key={el.country}>{el.country} </span>)}</span></li>
+                    <li><span>{typeof movie.genres === 'undefined' 
+                    ? '-'
+                    : movie.genres.map(el => <span key={el.genre}>{el.genre} </span>)}</span></li>
+                    <li><span>{staff[0] === undefined ? '-' : staff[0].nameRu}</span></li>
+                    <li><span>{budget['BUDGET'] ? '$' + budget['BUDGET'] : '-'}</span></li>
+                    <li><span>{budget['USA'] ? '$' + budget['USA'] : '-'}</span></li>
+                    <li><span>{budget['RUS'] ? '$' + budget['RUS'] : '-'}</span></li>
+                    <li><span>{budget['WORLD'] ? '$' + budget['WORLD'] : '-'}</span></li>
+                  </ul>
+                </div>
               </div>
-            </div>
-          </article>
-        </div>}
+            </article>
+          </div>}
         <p className={styles.text}>{movie.description}</p>
       </div>
     </div>
