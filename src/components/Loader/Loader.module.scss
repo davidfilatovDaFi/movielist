@@ -1,0 +1,25 @@
+.wrapper {
+  height: 100vh;
+}
+.circle {
+  width: 150px;
+  height: 150px;
+  border: 10px solid rgb(85, 194, 245);
+  border-radius: 50%;
+  border-top-color: transparent;
+  position: relative;
+  top: 30%;
+  left: 50%;
+  animation-name: circle;
+  animation-duration: 1s;
+  animation-iteration-count: infinite;
+}
+
+@keyframes circle {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}

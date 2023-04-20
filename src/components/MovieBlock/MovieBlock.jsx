@@ -19,7 +19,10 @@ export default function MovieBlock({poster,rating, title, genres, id}) {
 
   return (
       <article className={styles.block}>
-        <Link onClick={() => dispatch({type:'GET_ID',payload:id})} to={'/movie'}>
+        <Link onClick={() => {
+          dispatch({type:'GET_ID',payload:id})
+          localStorage.setItem('id',id)
+        }} to={'/movie'}>
           <div className={styles.poster}>
             <span className={styles.rating}>{getRating(rating)}</span>
             <img className={styles.picture} src={poster} alt="poster" />
