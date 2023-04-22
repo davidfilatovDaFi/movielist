@@ -13,7 +13,7 @@ export default function Header({onChange,search}) {
       </Link>
       <div className={styles.user}>
         <input placeholder='Search movie...' value={search} onChange={e => onChange(e.target.value)} className={styles.search} type="text" />
-        <a href=""><img src={favorite} alt="favorite" /></a>
+        <Link to={'/favorite'}><img src={favorite} alt="favorite" /></Link>
       </div>
   </header>
   )
