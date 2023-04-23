@@ -7,6 +7,7 @@ import { persistor, store } from './redux/store'
 import Favorite from './pages/Favorite/Favorite'
 import { PersistGate } from 'redux-persist/integration/react'
 import Loader from './components/Loader/Loader'
+import Header from './components/Header/Header'
 
 
 function App() {
@@ -14,11 +15,14 @@ function App() {
     <Provider store={store}>
       <PersistGate loading={<Loader/>} persistor={persistor}>
         <BrowserRouter>
-          <Routes>
-            <Route path='/' element={<Home/>}/>
-            <Route path='/movie' element={<MoviePage/>}/>
-            <Route path='/favorite' element={<Favorite/>}/>
-          </Routes>
+          <div className='container'>
+            <Header/>
+            <Routes>
+              <Route path='/' element={<Home/>}/>
+              <Route path='/movie' element={<MoviePage/>}/>
+              <Route path='/favorite' element={<Favorite/>}/>
+            </Routes>
+          </div>
         </BrowserRouter>
       </PersistGate>
     </Provider>

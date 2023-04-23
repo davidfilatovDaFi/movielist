@@ -1,33 +1,52 @@
 import React, { useEffect, useState } from 'react';
-import styles from './Home.module.scss'
-import Header from '../../components/Header/Header';
+import styles from './Home&Favorite.module.scss'
 import MovieBlock from '../../components/MovieBlock/MovieBlock';
 import { fetchAPI } from '../../services/serviceAPI';
 import { movieListUrl, descriptionAPI } from '../../constains/constains';
 import Loader from '../../components/Loader/Loader';
+import { useSelector } from 'react-redux';
 
 function Home() {
 
   const [movies,setMovies] = useState([])
-  const [search,setSearch] = useState('')
   const [loading,setLoading] = useState(false)
+  const [currentPage,setCurrentPage] = useState(1)
+  const [pagesCount,setPagesCount] = useState()
+  const [fetching,setFetching] = useState(true)
+  const search = useSelector(state => state.search)
 
   const getMovies = async () => {
-    setLoading(true)
-    const data = await fetchAPI(movieListUrl+'1',descriptionAPI)
-    setMovies(data.films)
-    setLoading(false)
+    if (fetching && search === '') {
+      setLoading(true)
+      const data = await fetchAPI(movieListUrl+currentPage,descriptionAPI)
+      setMovies([...movies, ...data.films])
+      setPagesCount(data.pagesCount)
+      setLoading(false)
+      setCurrentPage(currentPage + 1)
+      setFetching(false)
+    }
   }
-
+  console.log(currentPage)
   useEffect(() => {
     getMovies()
-  }, [])
+  }, [fetching])
   
+  useEffect(() => {
+    document.addEventListener('scroll',scrollHandler)
+    return () => {
+      document.removeEventListener('scroll',scrollHandler)
+    }
+  }) 
+
+  const scrollHandler = (e) => {
+    if (e.target.documentElement.scrollHeight - (e.target.documentElement.scrollTop + window.innerHeight) < 100 && currentPage < pagesCount) {
+      setFetching(true)
+    }
+  }
+
   return (
     <div className={styles.home}>
-      <div className='container'>
-        <Header onChange={value => setSearch(value)} search={search}/>
-        {loading 
+      {loading 
           ? <Loader/>
           : <section className={styles.list}>
           {search 
@@ -45,8 +64,7 @@ function Home() {
           rating={movie.rating}
           title={movie.nameRu}
           genres={movie.genres} />)}
-        </section>}
-      </div>
+      </section>}
     </div>
   );
 }

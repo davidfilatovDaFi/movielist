@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import { fetchAPI } from '../../services/serviceAPI'
-import { descriptionAPI, movieListUrl, getUrl } from '../../constains/constains'
+import { descriptionAPI, getUrl } from '../../constains/constains'
 import { useDispatch, useSelector } from 'react-redux'
 import styles from './MoviePage.module.scss'
-import Header from '../../components/Header/Header'
 import { ReactComponent as Favorite } from '../../assets/imgs/favorite.svg'
 import Loader from '../../components/Loader/Loader'
 
@@ -13,9 +12,10 @@ export default function MoviePage() {
   const [staff,setStaff] = useState({})
   const [budget,setBudget] = useState([{type: 'USA', amount:0}])
   const [loading,setLoading] = useState(false)
+
   const id = useSelector(state => state.id)
-  
-  console.log(id)
+  const favoriteMoviesId = useSelector(state => state.favorite.map(movie => movie.id))
+  console.log(favoriteMoviesId)
   const dispatch = useDispatch()
 
   const getFavorite = () => {
@@ -29,12 +29,12 @@ export default function MoviePage() {
     dispatch({type:'ADD_MOVIE',payload:newMovie})
   }
 
+
   const getData = async () => {
     setLoading(true)
     const dataMovie = await fetchAPI(getUrl('movie',id),descriptionAPI,)
     const dataStaff = await fetchAPI(getUrl('staff',id),descriptionAPI)
     const dataBudget = await fetchAPI(getUrl('budget',id),descriptionAPI)
-    console.log(dataMovie)
     setMovie(dataMovie)
     setStaff(dataStaff)
     const newBudget = {}
@@ -53,9 +53,7 @@ export default function MoviePage() {
   console.log(undefined + 'aaaaa')
   return (
     <div className={styles.main}>
-      <div className='container'>
-        <Header/>
-        {loading 
+      {loading 
         ? <Loader/>
         : <>
             <div className={styles.body}>
@@ -65,8 +63,14 @@ export default function MoviePage() {
               <article className={styles.info}>
                 <header className={styles.header}>
                     <h1>{movie.nameRu}</h1>
-                    <button onClick={getFavorite} className={styles.button}>
-                      <Favorite className={styles.favorite}/>
+                    <button onClick={
+                      favoriteMoviesId.includes(id)
+                      ? () => dispatch({type:'REMOVE_MOVIE',payload:id})
+                      : getFavorite} className={styles.button}>
+                      <Favorite className={
+                        favoriteMoviesId.includes(id)
+                        ? styles.active
+                        : styles.favorite}/>
                       Буду смотреть
                     </button>
                 </header>
@@ -102,8 +106,7 @@ export default function MoviePage() {
               </article>
             </div>
             <p className={styles.text}>{movie.description}</p>
-          </>}
-      </div>
+        </>}
     </div>
   )
 }

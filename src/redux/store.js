@@ -3,10 +3,12 @@ import { reducerMovieId } from "./reducers/reducerMovieId"
 import { reducerFavorite } from "./reducers/reducerFavorite"
 import { persistStore, persistReducer } from 'redux-persist'
 import storage from 'redux-persist/lib/storage'
+import { reducerSearch } from "./reducers/reducerSearch"
 
 const rootReducer = combineReducers({
   id: reducerMovieId,
-  favorite: reducerFavorite
+  favorite: reducerFavorite,
+  search: reducerSearch
 })
 
 const persistConfig = {

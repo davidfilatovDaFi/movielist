@@ -1,22 +1,18 @@
 import React, { useState } from 'react'
 import { useSelector } from 'react-redux'
-import styles from '../Home/Home.module.scss'
-import Header from '../../components/Header/Header'
+import styles from '../Home/Home&Favorite.module.scss'
 import MovieBlock from '../../components/MovieBlock/MovieBlock'
 
 export default function Favorite() {
 
-  const [search,setSearch] = useState('')
-
+  const search = useSelector(state => state.search)
   const movies = useSelector(state => state.favorite)
-  console.log(movies)
+
   return (
     <div className={styles.home}>
-      <div className='container'>
-        <Header onChange={value => setSearch(value)} search={search}/>
-        <section className={styles.list}>
+      <section className={styles.list}>
           {search 
-          ? movies.filter(movie => movie.nameRu.toLowerCase().includes(search.toLowerCase())).map(movie => <MovieBlock 
+          ? movies.filter(movie => movie.title.toLowerCase().includes(search.toLowerCase())).map(movie => <MovieBlock 
             key={movie.id}
             id={movie.id}
             poster={movie.poster}
@@ -30,8 +26,7 @@ export default function Favorite() {
           rating={movie.rating}
           title={movie.title}
           genres={movie.genres} />)}
-        </section>
-      </div>
+      </section>
     </div>
   )
 }
