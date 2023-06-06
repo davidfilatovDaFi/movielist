@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import styles from './Home&Favorite.module.scss'
 import MovieBlock from '../../components/MovieBlock/MovieBlock';
 import { fetchAPI } from '../../services/serviceAPI';
@@ -11,38 +11,48 @@ function Home() {
   const [movies,setMovies] = useState([])
   const [loading,setLoading] = useState(false)
   const [currentPage,setCurrentPage] = useState(1)
-  const [pagesCount,setPagesCount] = useState()
+  const [pagesCount,setPagesCount] = useState(5)
   const [fetching,setFetching] = useState(true)
   const search = useSelector(state => state.search)
 
   const getMovies = async () => {
+    setLoading(true)
+    const data = await fetchAPI(movieListUrl+currentPage,descriptionAPI)
+    setMovies([...data.films])
+    setPagesCount(data.pagesCount)
+    setLoading(false)
+    setCurrentPage(currentPage + 1)
+  }
+
+  const addMovies = async () => {
     if (fetching && search === '') {
-      setLoading(true)
       const data = await fetchAPI(movieListUrl+currentPage,descriptionAPI)
       setMovies([...movies, ...data.films])
-      setPagesCount(data.pagesCount)
-      setLoading(false)
       setCurrentPage(currentPage + 1)
       setFetching(false)
     }
   }
-  console.log(currentPage)
-  useEffect(() => {
-    getMovies()
-  }, [fetching])
-  
-  useEffect(() => {
-    document.addEventListener('scroll',scrollHandler)
-    return () => {
-      document.removeEventListener('scroll',scrollHandler)
-    }
-  }) 
 
   const scrollHandler = (e) => {
     if (e.target.documentElement.scrollHeight - (e.target.documentElement.scrollTop + window.innerHeight) < 100 && currentPage < pagesCount) {
       setFetching(true)
     }
   }
+
+  useEffect(() => {
+    getMovies()
+  }, [])
+
+  useEffect(() => {
+    document.addEventListener('scroll',scrollHandler)
+    return () => {
+      document.removeEventListener('scroll',scrollHandler)
+    }
+  },[pagesCount,currentPage]) 
+
+  useEffect(() => {
+    addMovies()
+  }, [fetching])
 
   return (
     <div className={styles.home}>

@@ -5,17 +5,17 @@ import { useDispatch, useSelector } from 'react-redux'
 import styles from './MoviePage.module.scss'
 import { ReactComponent as Favorite } from '../../assets/imgs/favorite.svg'
 import Loader from '../../components/Loader/Loader'
+import DescriptionList from '../../components/DescriptionList/DescriptionList'
 
 export default function MoviePage() {
 
   const [movie,setMovie] = useState('1')
   const [staff,setStaff] = useState({})
-  const [budget,setBudget] = useState([{type: 'USA', amount:0}])
+  const [budget,setBudget] = useState({})
   const [loading,setLoading] = useState(false)
 
   const id = useSelector(state => state.id)
   const favoriteMoviesId = useSelector(state => state.favorite.map(movie => movie.id))
-  console.log(favoriteMoviesId)
   const dispatch = useDispatch()
 
   const getFavorite = () => {
@@ -46,11 +46,11 @@ export default function MoviePage() {
     setBudget(newBudget)
     setLoading(false)
   }
-  
+  console.log(budget['BUDGET'])
   useEffect(() => {
     getData()
   }, [])
-  console.log(undefined + 'aaaaa')
+
   return (
     <div className={styles.main}>
       {loading 
@@ -61,7 +61,7 @@ export default function MoviePage() {
                 <img className={styles.picture} src={movie.posterUrl} alt="" />
               </article>
               <article className={styles.info}>
-                <header className={styles.header}>
+                <div className={styles.header}>
                     <h1>{movie.nameRu}</h1>
                     <button onClick={
                       favoriteMoviesId.includes(id)
@@ -73,34 +73,11 @@ export default function MoviePage() {
                         : styles.favorite}/>
                       Буду смотреть
                     </button>
-                </header>
+                </div>
                 <div className={styles.wrapper}>
                   <h1 className={styles.about}>О фильме</h1>
                   <div className={styles.description}>
-                    <ul className={styles.list}>
-                      <li>Год <span className={styles.production}>производства</span></li>
-                      <li><span>Страна</span></li>
-                      <li><span>Жанр</span></li>
-                      <li><span>Режисер</span></li>
-                      <li><span>Бюджет</span></li>
-                      <li><span>Сборы в США</span></li>
-                      <li><span>Сборы в России</span></li>
-                      <li><span>Сборы в мире</span></li>
-                    </ul>
-                    <ul className={styles.list}>
-                      <li><span>{movie.year}</span><span></span></li>
-                      <li><span>{typeof movie.countries === 'undefined' 
-                      ? '-'
-                      : movie.countries.map(el => <span key={el.country}>{el.country} </span>)}</span></li>
-                      <li><span>{typeof movie.genres === 'undefined' 
-                      ? '-'
-                      : movie.genres.map(el => <span key={el.genre}>{el.genre} </span>)}</span></li>
-                      <li><span>{staff[0] === undefined ? '-' : staff[0].nameRu}</span></li>
-                      <li><span>{budget['BUDGET'] ? '$' + budget['BUDGET'] : '-'}</span></li>
-                      <li><span>{budget['USA'] ? '$' + budget['USA'] : '-'}</span></li>
-                      <li><span>{budget['RUS'] ? '$' + budget['RUS'] : '-'}</span></li>
-                      <li><span>{budget['WORLD'] ? '$' + budget['WORLD'] : '-'}</span></li>
-                    </ul>
+                    <DescriptionList movie={movie} budget={budget} staff={staff} loading={loading}/>
                   </div>
                 </div>
               </article>
