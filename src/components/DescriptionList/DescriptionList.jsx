@@ -1,8 +1,8 @@
 import React from 'react'
 import styles from '../../pages/MoviePage/MoviePage.module.scss'
 
-export default function DescriptionList({movie,staff,budget,loading}) {
-  console.log(budget)
+export default function DescriptionList({movie,staff,budget}) {
+
   return (
     <ul className={styles.list}>
       <li>

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { useSelector } from 'react-redux'
 import styles from '../Home/Home&Favorite.module.scss'
 import MovieBlock from '../../components/MovieBlock/MovieBlock'

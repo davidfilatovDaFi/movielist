@@ -21,6 +21,6 @@ export default function Header() {
           <img src={favorite} alt="favorite" />
         </Link>
       </div>
-  </header>
+    </header>
   )
 }
