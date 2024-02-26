@@ -24,8 +24,8 @@
 .rating {
   position: absolute;
   color: white;
-  width: 15%;
-  height: 10%;
+  width: 40px;
+  height: 40px;
   justify-content: center;
   align-items: center;
   border-radius: 50%;
@@ -34,10 +34,10 @@
   top: 4%;
   background-color: rgb(25, 23, 43);
   display: none;
-  @media (max-width: 950px) {
+  @media (max-width: 1024px) {
     display: flex;
+    width: 35px;
+    height: 35px;
   }
-  @media (max-width: 570px) {
-    font-size: 18px;
-  }
+
 }

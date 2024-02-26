@@ -8,13 +8,13 @@
   display: grid;
   gap: 30px;
   grid-template-columns: repeat(4,1fr);
-  @media (max-width: 1200px) {
+  @media (max-width: 900px) {
     grid-template-columns: repeat(3,1fr);
   }
-  @media (max-width: 750px) {
+  @media (max-width: 680px) {
     grid-template-columns: repeat(2,1fr);
   }
-  @media (max-width: 570px) {
+  @media (max-width: 430px) {
     grid-template-columns: 1fr;
   }
 }

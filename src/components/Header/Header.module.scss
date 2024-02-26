@@ -1,8 +1,14 @@
 .header {
   display: flex;
+  position: sticky;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 9;
+  background-color: rgba(25, 23, 43, 0.8);
   justify-content: space-between;
   align-items: center;
-  padding: 15px 0 35px 0;
+  padding: 15px 0;
 }
 .body {
   display: flex;

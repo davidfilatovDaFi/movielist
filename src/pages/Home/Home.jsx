@@ -23,15 +23,15 @@ function Home() {
 
   useEffect(() => {
     addMovies()
-  }, [fetching])
+  }, [fetching, search])
 
   return (
     <div className={styles.home}>
       {loading 
           ? <Loader/>
           : <section className={styles.list}>
-          {search 
-          ? movies.filter(movie => movie.nameRu.toLowerCase().includes(search.toLowerCase())).map(movie => <MovieBlock 
+          {search
+          ? movies.filter(movie => movie.nameRu?.toLowerCase().includes(search.toLowerCase())).map(movie => <MovieBlock 
             key={movie.filmId}
             id={movie.filmId}
             poster={movie.posterUrlPreview}
